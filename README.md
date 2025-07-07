@@ -8,6 +8,8 @@ A comprehensive React-based platform connecting institutional-grade real-world a
 
 ## 🌟 Platform Overview
 
+Unlocking Tokenized Assets for Everyone
+
 ErisRWA is a sophisticated investment platform that democratizes access to premium real-world assets through tokenization and blockchain technology. The platform serves two distinct user types with specialized experiences:
 
 ### 👥 For Investors
