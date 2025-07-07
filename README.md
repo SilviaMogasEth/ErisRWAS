@@ -33,7 +33,7 @@ ErisRWA is a sophisticated investment platform that democratizes access to premi
 
 ### 💎 Investment Experience
 - **Tiered Access Model**: Free tier (3 assets/month) and Premium ($25/month for unlimited access)
-- **Multiple Payment Methods**: Credit cards (Stripe) and cryptocurrency (USDC, USDT, ETH)
+- **Multiple Payment Methods**: Credit cards and cryptocurrency (USDC, USDT, ETH, FLOW)
 - **Investment Modal Flow**: 3-step process with amount selection, payment, and NFT minting
 - **Portfolio Tracking**: Real-time valuation, returns calculation, and performance metrics
 
@@ -250,4 +250,4 @@ Experience the platform immediately with pre-configured demo accounts:
 
 **ErisRWA** - Democratizing access to institutional-grade real-world asset investments through innovative blockchain technology and professional-grade user experience.
 
-*For technical support or business inquiries, contact: [BMBWeb3 Global – FZCO]*
+*For technical support or business inquiries, contact: [silviam@bmbweb3.com]*
