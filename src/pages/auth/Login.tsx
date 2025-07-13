@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Mail, Lock, User, Users, Shield, ArrowRight, Play, Star } from 'lucide-react';
+import { Mail, Lock, User, Users, Shield, ArrowRight, Play, Star, Wallet } from 'lucide-react';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState<'investor' | 'rwa-project'>('investor');
   const [isLoading, setIsLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, loginWithPrivy, isPrivyAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -38,6 +38,17 @@ const Login: React.FC = () => {
       setIsLoading(false);
     }
   };
+
+  const handlePrivyLogin = () => {
+    loginWithPrivy();
+  };
+
+  // Redirect if already authenticated with Privy
+  React.useEffect(() => {
+    if (isPrivyAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isPrivyAuthenticated, navigate]);
 
   const LogoComponent = () => (
     <div className="relative w-12 h-12">
@@ -84,6 +95,30 @@ const Login: React.FC = () => {
             <p className="text-gray-600">Access your platform</p>
           </div>
 
+          {/* Primary Privy Login Button */}
+          <div className="mb-6">
+            <button
+              onClick={handlePrivyLogin}
+              disabled={isLoading}
+              className="w-full flex items-center justify-center p-4 bg-gradient-to-r from-emerald-600 to-blue-600 text-white rounded-xl hover:from-emerald-700 hover:to-blue-700 transition-all duration-200 font-semibold disabled:opacity-50 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+            >
+              <Wallet className="h-5 w-5 mr-3" />
+              Login with Privy
+            </button>
+            <p className="text-xs text-gray-500 text-center mt-2">
+              Connect with wallet, email, Google, Twitter, or other Web3 methods
+            </p>
+          </div>
+
+          <div className="relative mb-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300" />
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-3 bg-white text-gray-500 font-medium">Or try demo accounts</span>
+            </div>
+          </div>
+
           {/* Demo Login Section */}
           <div className="mb-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-200">
             <div className="flex items-center mb-4">
@@ -121,7 +156,7 @@ const Login: React.FC = () => {
               <div className="w-full border-t border-gray-300" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Or sign in with your account</span>
+              <span className="px-3 bg-white text-gray-500 font-medium">Or sign in with your account</span>
             </div>
           </div>
 

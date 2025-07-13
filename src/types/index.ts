@@ -6,6 +6,8 @@ export interface User {
   kycStatus?: 'pending' | 'approved' | 'rejected';
   profileCompleted?: boolean;
   subscriptionTier?: 'free' | 'premium';
+  walletAddress?: string;
+  isPrivyUser?: boolean;
 }
 
 export interface RWA {

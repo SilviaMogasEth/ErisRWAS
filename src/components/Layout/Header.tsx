@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { LogOut, User, Bell, Settings } from 'lucide-react';
+import { LogOut, User, Bell, Settings, Wallet } from 'lucide-react';
 
 const Header: React.FC = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, isPrivyAuthenticated, walletAddress, loginWithPrivy } = useAuth();
   const location = useLocation();
   const [logoClicked, setLogoClicked] = useState(false);
 
@@ -126,6 +126,12 @@ const Header: React.FC = () => {
                       <div className="text-sm font-medium text-gray-900">{user.name}</div>
                       <div className="text-xs text-gray-500">
                         {user.type === 'investor' ? 'Investor' : 'Asset Originator'}
+                        {isPrivyAuthenticated && walletAddress && (
+                          <div className="flex items-center mt-1">
+                            <Wallet className="h-3 w-3 mr-1" />
+                            {`${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -145,6 +151,13 @@ const Header: React.FC = () => {
               </div>
             ) : (
               <div className="flex items-center space-x-3">
+                <button
+                  onClick={loginWithPrivy}
+                  className="flex items-center space-x-2 text-emerald-700 hover:text-emerald-800 text-sm font-medium transition-colors px-4 py-2 rounded-lg hover:bg-emerald-50 border border-emerald-200 hover:border-emerald-300"
+                >
+                  <Wallet className="h-4 w-4" />
+                  <span>Login with Privy</span>
+                </button>
                 <Link
                   to="/login"
                   className="text-gray-700 hover:text-indigo-700 text-sm font-medium transition-colors px-4 py-2 rounded-lg hover:bg-gray-50"
