@@ -28,19 +28,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   
-  // Privy hooks
+  // Check if Privy is available
   const appId = import.meta.env.VITE_PRIVY_APP_ID;
-  const privyHooks = appId && appId !== 'dummy-build-value' ? usePrivy() : null;
-  const accountHooks = appId && appId !== 'dummy-build-value' ? useAccount() : null;
+  const isPrivyAvailable = appId && appId !== 'dummy-build-value';
   
-  const {
-    login: privyLogin,
-    logout: privyLogout,
-    authenticated: isPrivyAuthenticated,
-    user: privyUser,
-  } = privyHooks || { login: () => {}, logout: () => {}, authenticated: false, user: null };
+  // Conditionally use Privy hooks
+  let privyLogin: (() => void) | undefined;
+  let privyLogout: (() => void) | undefined;
+  let isPrivyAuthenticated = false;
+  let privyUser: any = null;
+  let walletAddress: string | undefined;
   
-  const { address: walletAddress } = accountHooks || { address: undefined };
+  try {
+    if (isPrivyAvailable) {
+      const privyHooks = usePrivy();
+      const accountHooks = useAccount();
+      
+      privyLogin = privyHooks.login;
+      privyLogout = privyHooks.logout;
+      isPrivyAuthenticated = privyHooks.authenticated;
+      privyUser = privyHooks.user;
+      walletAddress = accountHooks.address;
+    }
+  } catch (error) {
+    // Fallback if hooks fail
+    console.warn('Privy hooks not available:', error);
+  }
 
   useEffect(() => {
     // Check for existing session
