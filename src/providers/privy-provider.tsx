@@ -30,9 +30,13 @@ interface PrivyWagmiProviderProps {
 export function PrivyWagmiProvider({ children }: PrivyWagmiProviderProps) {
   const appId = import.meta.env.VITE_PRIVY_APP_ID;
   
-  // During build time or when app ID is not available, render children without any providers
+  // Always provide QueryClient, but conditionally wrap with Privy/Wagmi
   if (!appId || appId === 'dummy-build-value') {
-    return <>{children}</>;
+    return (
+      <QueryClientProvider client={queryClient}>
+        {children}
+      </QueryClientProvider>
+    );
   }
 
   return (
