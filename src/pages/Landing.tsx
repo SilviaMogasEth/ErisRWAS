@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TrendingUp, Shield, GraduationCap, Building2, Users, DollarSign, Globe, Award, CheckCircle, ArrowRight, BarChart3, Lock, Star, Quote } from 'lucide-react';
+import { TrendingUp, Shield, GraduationCap, Building2, Users, DollarSign, Globe, Award, CheckCircle, ArrowRight, BarChart3, Lock, Star, Quote, Wallet } from 'lucide-react';
 import PricingSection from '../components/PricingSection';
+import { useAuth } from '../context/AuthContext';
 
 const Landing: React.FC = () => {
+  const { loginWithPrivy } = useAuth();
+  
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -25,6 +28,14 @@ const Landing: React.FC = () => {
               Democratizing access to institutional-grade investments through blockchain innovation.
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
+              <button
+                onClick={loginWithPrivy}
+                className="group inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-lg bg-gradient-to-r from-emerald-600 to-blue-600 text-white hover:from-emerald-700 hover:to-blue-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                <Wallet className="mr-3 h-6 w-6" />
+                Login with Privy
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </button>
               <Link
                 to="/register?type=investor"
                 className="group inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
