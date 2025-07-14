@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContextUpdated';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, userType }) => {
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, needsRoleSelection } = useAuth();
 
   if (isLoading) {
     return (
@@ -19,7 +19,11 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, userType }) =
   }
 
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
+  }
+
+  if (needsRoleSelection) {
+    return <Navigate to="/role-selection" replace />;
   }
 
   if (userType && user.type !== userType) {

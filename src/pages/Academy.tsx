@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContextUpdated';
 import { GraduationCap, Clock, Star, Play, Lock, BookOpen, TrendingUp, Shield, CheckCircle, Award, Trophy } from 'lucide-react';
 import { AcademyLesson } from '../types';
 

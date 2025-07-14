@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { TrendingUp, Shield, GraduationCap, Building2, Users, DollarSign, Globe, Award, CheckCircle, ArrowRight, BarChart3, Lock, Star, Quote, Wallet } from 'lucide-react';
 import PricingSection from '../components/PricingSection';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContextUpdated';
 
 const Landing: React.FC = () => {
   const { loginWithPrivy } = useAuth();

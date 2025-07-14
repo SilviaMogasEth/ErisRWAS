@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContextUpdated';
+import { SimplePrivyButton } from '../../components/SimplePrivyButton';
 import { Mail, Lock, User, Users, Shield, ArrowRight, Play, Star, Wallet } from 'lucide-react';
 
 const Login: React.FC = () => {
@@ -8,7 +9,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState<'investor' | 'rwa-project'>('investor');
   const [isLoading, setIsLoading] = useState(false);
-  const { login, loginWithPrivy, isPrivyAuthenticated } = useAuth();
+  const { login, loginWithPrivy, isPrivyAuthenticated, user, needsRoleSelection, clearAllSessions } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -43,12 +44,17 @@ const Login: React.FC = () => {
     loginWithPrivy();
   };
 
-  // Redirect if already authenticated with Privy
+  // Only auto-redirect if user has completed authentication flow
   React.useEffect(() => {
-    if (isPrivyAuthenticated) {
-      navigate('/dashboard');
+    // Only redirect if we have a complete user with role (not just Privy auth)
+    if (user && user.type && !needsRoleSelection) {
+      // Small delay to let user see the success state
+      const timer = setTimeout(() => {
+        navigate('/dashboard');
+      }, 1500);
+      return () => clearTimeout(timer);
     }
-  }, [isPrivyAuthenticated, navigate]);
+  }, [user, needsRoleSelection, navigate]);
 
   const LogoComponent = () => (
     <div className="relative w-12 h-12">
@@ -97,14 +103,7 @@ const Login: React.FC = () => {
 
           {/* Primary Privy Login Button */}
           <div className="mb-6">
-            <button
-              onClick={handlePrivyLogin}
-              disabled={isLoading}
-              className="w-full flex items-center justify-center p-4 bg-gradient-to-r from-emerald-600 to-blue-600 text-white rounded-xl hover:from-emerald-700 hover:to-blue-700 transition-all duration-200 font-semibold disabled:opacity-50 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
-            >
-              <Wallet className="h-5 w-5 mr-3" />
-              Login with Privy
-            </button>
+            <SimplePrivyButton />
             <p className="text-xs text-gray-500 text-center mt-2">
               Connect with wallet, email, Google, Twitter, or other Web3 methods
             </p>

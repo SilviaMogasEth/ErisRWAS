@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContextUpdated';
 import { Shield, User, GraduationCap, Building2, TrendingUp, AlertCircle, CheckCircle, Clock, Star, DollarSign, CreditCard, Zap, Wallet, Award, Trophy, Target, Import as Passport, BookOpen, X, MapPin, Calendar } from 'lucide-react';
 import KYCModal from '../../components/KYCModal';
 import InvestorProfileModal, { InvestorProfile } from '../../components/InvestorProfileModal';

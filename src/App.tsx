@@ -1,13 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { PrivyWagmiProvider } from './providers/privy-provider';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContextUpdated';
 import Layout from './components/Layout/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import ScrollToTop from './components/ScrollToTop';
 import Landing from './pages/Landing';
 import Login from './pages/auth/Login';
+import LoginSimple from './pages/auth/LoginSimple';
 import Register from './pages/auth/Register';
+import RoleSelectionPage from './pages/auth/RoleSelectionPage';
 import Dashboard from './pages/dashboard/Dashboard';
 import Marketplace from './pages/Marketplace';
 import PropertyDetails from './pages/PropertyDetails';
@@ -30,7 +32,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Landing />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/login-simple" element={<LoginSimple />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/role-selection" element={<RoleSelectionPage />} />
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/marketplace-landing" element={<FeatureLanding />} />
               <Route path="/academy-landing" element={<FeatureLanding />} />

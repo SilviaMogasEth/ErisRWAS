@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContextUpdated';
 import { Search, Filter, MapPin, TrendingUp, Clock, Shield, Star, Award } from 'lucide-react';
 import { RWA } from '../types';
 

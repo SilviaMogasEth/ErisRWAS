@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContextUpdated';
 import InvestorDashboard from './InvestorDashboard';
 import RWAProjectDashboard from './RWAProjectDashboard';
 
